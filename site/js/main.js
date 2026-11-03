@@ -433,3 +433,17 @@ if (toggle) {
   window.addEventListener("resize", kick);
   update();
 })();
+
+// Problemet: flowet starter i fejl-tilstanden, og knappen bygger det om med Tour de chambre først (og tilbage igen).
+(function () {
+  var section = document.querySelector("[data-flowfix]");
+  if (!section) return;
+  var btn = section.querySelector("[data-flow-btn]");
+  section.setAttribute("data-state", "fejl");
+  btn.hidden = false;
+  btn.addEventListener("click", function () {
+    var fejl = section.getAttribute("data-state") === "fejl";
+    section.setAttribute("data-state", fejl ? "rettet" : "fejl");
+    btn.textContent = fejl ? "Se fejlen igen" : "Byg flowet om";
+  });
+})();

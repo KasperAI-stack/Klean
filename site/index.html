@@ -115,13 +115,27 @@
       </div>
     </section>
 
-    <!-- 2. Udfordringen: det, jobopslaget beskriver -->
-    <section class="section split" aria-labelledby="problem-titel">
-      <h2 id="problem-titel">AI skaber først værdi, når den kører i kundens hverdag</h2>
-      <div class="split-text">
-        <p>I hjælper virksomheder med AI-strategi, AI adoption, intelligente agenter og automatisering. Det svære for jeres kunder er sjældent at se mulighederne. Det svære er at få én af dem til at køre i hverdagen, så medarbejderne mærker gevinsten, og piloten ikke ender i skuffen.</p>
-        <p>Det er dér, jeg vil gøre en forskel. Jeg tager en tour de chambre hos kunden, ser hvordan medarbejderne faktisk arbejder, og bygger systemet til netop deres processer, data og værktøjer. Løsningen er først færdig, når den kører i hverdagen.</p>
+    <!-- 2. Problemet: et lille workflow i n8n-stil, der fejler i hverdagen. Knappen bygger det om med Tour de chambre først,
+         og så kommer der et målbart output ud. Uden JS vises den rettede udgave. -->
+    <section class="section flowfix" aria-labelledby="problem-titel" data-flowfix data-state="rettet">
+      <div class="flowfix-text">
+        <p class="flowfix-eyebrow"><span aria-hidden="true"></span>Problemet</p>
+        <h2 id="problem-titel">AI-projekter dør sjældent i koden. De dør mandag morgen, når ingen åbner dem.</h2>
+        <p>Jeres kunder har ikke brug for flere eksperimenter. De har brug for AI, der bliver brugt. I siger det selv: AI må ikke stoppe ved teknologi og pilotprojekter.</p>
       </div>
+      <div class="flow">
+        <ol class="flow-nodes">
+          <li class="flow-node flow-new"><span class="flow-dot" aria-hidden="true"></span><span class="flow-name">Tour de chambre</span><span class="flow-sub">Medarbejderne først</span></li>
+          <li class="flow-node"><span class="flow-dot" aria-hidden="true"></span><span class="flow-name">AI-strategi</span><span class="flow-sub">Roadmap og idékatalog</span></li>
+          <li class="flow-node"><span class="flow-dot" aria-hidden="true"></span><span class="flow-name">Teknisk løsning</span><span class="flow-sub">Agenter og integrationer</span></li>
+          <li class="flow-node flow-end" aria-live="polite"><span class="flow-dot" aria-hidden="true"></span><span class="flow-name">Hverdagen</span><span class="flow-sub flow-ok">Brugt hver dag</span><span class="flow-error">Pilot sat på pause: ingen åbner den</span></li>
+        </ol>
+        <div class="flow-foot">
+          <p class="flow-output"><span>Output hos VoiceArchive:</span> 12 t sparet om ugen i marketing og 10 i salg</p>
+          <button class="btn btn-accent flow-btn" type="button" data-flow-btn hidden>Byg flowet om</button>
+        </div>
+      </div>
+      <p class="flowfix-after">Jeg bygger løsningen omkring de mennesker, der skal bruge den, og kobler den til de værktøjer, de allerede har.</p>
     </section>
 
     <!-- Værktøjer -->
