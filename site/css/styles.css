@@ -904,3 +904,7 @@ h1 {
 @media (prefers-reduced-motion: reduce) {
   .flow-node + .flow-node::before, .flowfix[data-state="fejl"] .flow-end .flow-dot, .flow-new, .flow-output { animation: none; }
 }
+
+/* Under casene: link til flere projekter i CV'et */
+.cases-more { margin: 2rem 0 0; text-align: center; color: var(--muted); }
+.cases-more a { color: var(--ink); font-weight: 600; text-underline-offset: 3px; }
