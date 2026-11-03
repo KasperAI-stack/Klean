@@ -1,0 +1,220 @@
+/* CV og ansøgning: de to PDF-dokumenter bygget som websider. De står altid i lyst tema, ligesom PDF'erne,
+   og bruger samme skrift som PDF'erne: Figtree. Toppen og knapperne kommer fra styles.css. */
+
+/* Figtree (variabel skrift, vægt 300 til 900). Licens: SIL Open Font License, se /fonts/OFL-figtree.txt. */
+@font-face {
+  font-family: "Figtree";
+  font-style: normal;
+  font-weight: 300 900;
+  font-display: swap;
+  src: url("/fonts/figtree-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* Farverne er aflæst direkte fra PDF'erne */
+:root {
+  --doc-deep: #00401E;   /* overskrifter, navn, tal-firkanter og Kleans logo-firkant */
+  --doc-green: #1F7A45;  /* fremhævninger, firmanavne, punkttegn og streger */
+  --doc-ink: #1F2A24;
+  --doc-muted: #55665C;
+  --doc-date: #6F7F75;
+  --doc-line: #E1E8E3;
+  --doc-mint: #EAF4ED;   /* introboksen og Kaspers bobler */
+  --doc-mint-line: #D3E6DA;
+  --doc-stat: #F3F7F4;   /* tal-kortene og fladen bag ansøgningen */
+  --doc-stat-line: #CFE5D6;
+  --doc-desk: #EEF3EF;
+}
+
+/* Siderne ligger på en flade i dokumentets farve, og toppen står hvid ovenpå */
+body.doc-cv-page { background: var(--doc-desk); }
+body.doc-chat-page { background: var(--doc-stat); }
+.doc-main { padding: clamp(1rem, 3vw, 2.5rem) var(--gutter) 2.5rem; }
+@media (max-width: 30rem) { .doc-pdf { display: none; } }
+
+/* Bunden: videre til det andet dokument, PDF'en og forsiden */
+.doc-nav { display: flex; flex-wrap: wrap; justify-content: center; gap: .75rem; margin: 2.5rem auto 0; }
+.doc-nav .btn-ghost { background: #fff; }
+
+/* ===== CV ===== */
+.cv {
+  max-width: 62rem; margin: 0 auto; overflow: hidden;
+  background: #fff; color: var(--doc-ink); border-radius: 20px;
+  box-shadow: 0 1px 2px rgb(16 32 26 / .05), 0 18px 48px rgb(16 32 26 / .08);
+  font-family: "Figtree", "Helvetica Neue", Arial, sans-serif; font-size: 1rem; line-height: 1.55;
+}
+@media (max-width: 40rem) {
+  .doc-cv-page .doc-main { padding-inline: 0; padding-top: 0; }
+  .cv { border-radius: 0; box-shadow: none; }
+}
+.cv h1, .cv h2, .cv h3 { letter-spacing: 0; text-wrap: balance; }
+.cv a { color: inherit; text-decoration-color: var(--doc-stat-line); text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.cv a:hover { text-decoration-color: var(--doc-green); }
+.cv strong { font-weight: 700; color: var(--doc-deep); }
+
+/* Toppen: memojien og konfettien går helt ud til kanten, og overskriften står til højre for memojien.
+   Teksten skalerer med billedet (cqw), så det ligner PDF'en. På smalle skærme står teksten under billedet. */
+.cv-hero { position: relative; container-type: inline-size; }
+.cv-hero-img { display: block; width: 100%; height: auto; }
+.cv-hero-text { position: absolute; left: 27.6%; right: 3%; top: 4.6cqw; }
+.cv-hero h1 { margin: 0; max-width: none; color: var(--doc-deep); font-size: 3.9cqw; font-weight: 900; line-height: 1; letter-spacing: 0; text-transform: uppercase; }
+.cv-hero h1 span { color: var(--doc-green); }
+.cv-hero-sub { margin: .55em 0 0; color: var(--doc-muted); font-size: 1.95cqw; font-weight: 400; line-height: 1.2; }
+@container (max-width: 34rem) {
+  .cv-hero-img { height: 7.5rem; object-fit: cover; object-position: left top; }
+  .cv-hero-text { position: static; padding: 1rem clamp(1.25rem, 4vw, 3rem) 0; }
+  .cv-hero h1 { font-size: 1.65rem; line-height: 1.05; }
+  .cv-hero-sub { font-size: 1rem; }
+}
+
+.cv-body { padding: 0 clamp(1.25rem, 4vw, 3rem) clamp(2rem, 4vw, 3rem); }
+.cv-id { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1.25rem; margin-top: 1.25rem; }
+.cv-name { margin: 0; color: var(--doc-deep); font-size: clamp(1.9rem, 4.4vw, 2.6rem); font-weight: 900; line-height: 1.05; text-transform: uppercase; }
+.cv-pill { padding: .35rem 1rem; border-radius: 999px; background: var(--doc-green); color: #fff; font-size: .95rem; font-weight: 700; white-space: nowrap; }
+.cv-contact { display: flex; flex-wrap: wrap; gap: .4rem 2rem; margin: 1rem 0 0; font-size: 1rem; }
+.cv-intro {
+  margin: 1.5rem 0 0; padding: 1.1rem 1.5rem 1.1rem 1.6rem;
+  background: var(--doc-mint); border-left: 5px solid var(--doc-green); border-radius: 0 12px 12px 0;
+  font-size: 1.05rem; line-height: 1.65;
+}
+.cv-intro strong { color: var(--doc-green); }
+
+/* Fire tal i lyse kort med grøn kant */
+.cv-stats { list-style: none; margin: 1.1rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .85rem; }
+.cv-stats li { display: grid; align-content: start; gap: .25rem; padding: .85rem 1.1rem 1rem; background: var(--doc-stat); border: 2px solid var(--doc-stat-line); border-radius: 14px; }
+.cv-stats b { color: var(--doc-green); font-size: 1.75rem; font-weight: 900; line-height: 1.1; }
+.cv-stats span { color: var(--doc-muted); font-size: .875rem; line-height: 1.35; }
+@media (max-width: 44rem) { .cv-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+.cv-cols { display: grid; gap: 2.25rem 3rem; margin-top: 2rem; }
+@media (min-width: 54rem) { .cv-cols { grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr); } }
+.cv-main, .cv-side { display: grid; gap: 2rem; align-content: start; min-width: 0; }
+.cv h2 {
+  margin: 0 0 1.1rem; padding-bottom: .5rem; border-bottom: 3px solid var(--doc-green);
+  color: var(--doc-deep); font-size: 1.3rem; font-weight: 900; letter-spacing: .03em; text-transform: uppercase;
+}
+
+/* Erfaring: firmalogo til venstre, titel og dato på én linje, firmanavn i grøn og bullets med grønne firkanter */
+.cv-jobs { display: grid; gap: 1.5rem; }
+.cv-job { display: grid; grid-template-columns: 3rem minmax(0, 1fr); gap: 1.1rem; }
+.cv-logo { display: block; width: 3rem; height: 3rem; border-radius: 9px; object-fit: cover; border: 1px solid var(--doc-line); box-shadow: 0 2px 6px rgb(16 32 26 / .08); }
+.cv-job-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 0 1rem; }
+.cv-job h3 { margin: 0; color: var(--doc-deep); font-size: 1.2rem; font-weight: 800; }
+.cv-date { margin: 0; color: var(--doc-date); font-size: .925rem; white-space: nowrap; }
+.cv-company { margin: 0 0 .45rem; color: var(--doc-green); font-weight: 700; font-size: 1.1rem; }
+.cv-bullets { list-style: none; margin: 0; padding: 0; display: grid; gap: .3rem; font-size: .975rem; }
+.cv-bullets li { position: relative; padding-left: 1.2rem; }
+.cv-bullets li::before { content: ""; position: absolute; left: 0; top: .55em; width: .5rem; height: .5rem; border-radius: 2px; background: var(--doc-green); }
+.cv-side-job { margin: 0; color: var(--doc-muted); font-size: .975rem; }
+
+/* Egne projekter: korte afsnit med navnet i fed */
+.cv-projects { display: grid; gap: .6rem; }
+.cv-projects p { margin: 0; font-size: .975rem; }
+
+/* Værktøjer: logo, navn og kategori i et gitter med to kolonner */
+.cv-tools { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .55rem; }
+.cv-tool { display: flex; align-items: center; gap: .75rem; min-width: 0; padding: .6rem .75rem; border: 2px solid var(--doc-line); border-radius: 9px; }
+.cv-tool img { flex: none; width: 1.9rem; height: 1.9rem; object-fit: contain; }
+.cv-tool span { display: grid; min-width: 0; line-height: 1.25; }
+.cv-tool b { color: var(--doc-deep); font-size: .95rem; font-weight: 700; }
+.cv-tool small { color: var(--doc-muted); font-size: .85rem; overflow-wrap: anywhere; }
+.cv-also { margin: .9rem 0 0; color: var(--doc-muted); font-size: .925rem; }
+
+/* Sådan arbejder jeg: nummererede trin i mørkegrønne firkanter */
+.cv-steps { list-style: none; margin: 0; padding: 0; display: grid; gap: .85rem; font-size: .975rem; }
+.cv-steps li { display: grid; grid-template-columns: 1.65rem minmax(0, 1fr); gap: .85rem; }
+.cv-steps p, .plan p, .steps p { margin: 0; }
+.cv-steps strong { color: var(--doc-green); }
+.cv-num { display: grid; place-items: center; width: 1.65rem; height: 1.65rem; margin-top: .05rem; border-radius: 5px; background: var(--doc-deep); color: #fff; font-size: .85rem; font-weight: 800; }
+
+.cv-edu { display: grid; gap: .9rem; }
+.cv-edu p, .cv-lang { margin: 0; font-size: .975rem; }
+.cv-edu .cv-date { white-space: normal; color: var(--doc-muted); font-size: .975rem; }
+
+/* Foto og Kleans logo nederst i højre kolonne */
+.cv-sign { display: flex; align-items: center; justify-content: flex-end; gap: 1.1rem; }
+.cv-photo, .cv-company-mark { display: block; width: 6.5rem; height: 6.5rem; border-radius: 14px; }
+.cv-photo { object-fit: cover; }
+
+/* ===== Ansøgning som chat ===== */
+.chat-doc {
+  max-width: 48rem; margin: 0 auto; color: var(--doc-ink);
+  font-family: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 1rem; line-height: 1.6;
+}
+.chat-doc a { color: inherit; text-decoration-color: var(--doc-stat-line); text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.chat-doc a:hover { text-decoration-color: var(--doc-green); }
+
+/* Toppen: foto, navn, stillingen, en grøn status og Kleans logo til højre */
+.chat-head {
+  display: flex; align-items: center; gap: 1.1rem;
+  padding: 1.1rem 1.4rem; background: #fff; border: 1px solid var(--doc-line); border-radius: 20px;
+}
+.chat-head-photo { flex: none; width: 4.25rem; height: 4.25rem; border-radius: 50%; object-fit: cover; }
+.chat-head > div { min-width: 0; }
+.chat-name { margin: 0; max-width: none; letter-spacing: 0; color: var(--doc-deep); font-size: 1.65rem; font-weight: 900; line-height: 1.15; text-transform: uppercase; }
+.chat-role { margin: .1rem 0 0; color: var(--doc-muted); font-size: .95rem; line-height: 1.4; }
+.chat-status { display: flex; align-items: center; gap: .5rem; margin: .3rem 0 0; color: var(--doc-deep); font-size: .95rem; font-weight: 700; }
+.chat-status::before { content: ""; flex: none; width: .6rem; height: .6rem; border-radius: 50%; background: var(--doc-green); box-shadow: 0 0 0 3px var(--doc-stat-line); }
+.chat-head-mark { flex: none; width: 4.5rem; height: 4.5rem; margin-left: auto; border-radius: 12px; }
+@media (max-width: 34rem) {
+  .chat-head { align-items: flex-start; padding: 1rem; }
+  .chat-head-photo { width: 3.25rem; height: 3.25rem; }
+  .chat-name { font-size: 1.3rem; }
+  .chat-head-mark { width: 2.75rem; height: 2.75rem; border-radius: 8px; }
+}
+
+/* Samtalen: Ole til venstre i hvide bobler, Kasper til højre i lysegrønne */
+.chat-log { list-style: none; margin: 2rem 0 0; padding: 0; display: grid; gap: 1.25rem; }
+.msg { display: flex; align-items: flex-end; gap: .75rem; }
+.msg-me { justify-content: flex-end; padding-left: clamp(0rem, 6vw, 2.5rem); }
+.msg-avatar { flex: none; width: 2.6rem; height: 2.6rem; border-radius: 50%; object-fit: cover; }
+/* Oles avatar: initialerne på Kleans mørkegrønne farve, som i PDF'en */
+.msg-initials { display: grid; place-items: center; background: var(--doc-deep); color: #fff; font-size: .85rem; font-weight: 900; letter-spacing: .02em; align-self: center; }
+.bubble { min-width: 0; padding: .9rem 1.25rem; border-radius: 14px; }
+.msg-them .bubble { max-width: 34rem; background: #fff; border: 1px solid var(--doc-line); }
+.msg-me .bubble { background: var(--doc-mint); border: 1px solid var(--doc-mint-line); }
+.bubble p { margin: 0 0 .75rem; }
+.bubble p:last-child { margin-bottom: 0; }
+.bubble-from { margin: 0 0 .3rem !important; font-size: .75rem; font-weight: 800; line-height: 1.3; letter-spacing: .08em; text-transform: uppercase; }
+.msg-them .bubble-from { color: var(--doc-deep); }
+.msg-me .bubble-from { color: var(--doc-green); }
+@media (max-width: 30rem) {
+  .msg { gap: .5rem; }
+  .msg-avatar { width: 1.9rem; height: 1.9rem; }
+  .msg-initials { font-size: .65rem; }
+  .bubble { padding: .75rem .9rem; }
+}
+
+/* Eksemplet og 90-dages-planen: nummererede trin i et hvidt kort inde i Kaspers boble */
+.steps, .plan { list-style: none; margin: 0 0 .85rem; padding: .35rem 1.1rem; display: grid; background: #fff; border: 1px solid var(--doc-line); border-radius: 12px; }
+.steps li, .plan li { display: grid; grid-template-columns: 1.6rem minmax(0, 1fr); gap: .8rem; padding: .8rem 0; }
+.steps li + li, .plan li + li { border-top: 1px solid var(--doc-line); }
+.step-num, .plan-num { display: grid; place-items: center; width: 1.6rem; height: 1.6rem; margin-top: .05rem; border-radius: 50%; background: var(--doc-deep); color: #fff; font-size: .8rem; font-weight: 800; }
+.steps b, .plan b { display: block; color: var(--doc-deep); font-weight: 700; }
+.bubble .steps p, .bubble .plan p { margin: 0; }
+.steps:has(+ .chat-stats) { margin-bottom: 0; border-bottom-left-radius: 0; border-bottom-right-radius: 0; border-bottom: 0; }
+/* Tallene under eksemplet */
+.chat-stats { list-style: none; margin: 0 0 .25rem; padding: .25rem 1.1rem 1.1rem; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .6rem; background: #fff; border: 1px solid var(--doc-line); border-top: 0; border-radius: 0 0 12px 12px; }
+.chat-stats li { display: grid; gap: .1rem; padding: .6rem .8rem; background: var(--doc-mint); border-radius: 8px; }
+.chat-stats b { color: var(--doc-green); font-size: 1.25rem; font-weight: 900; line-height: 1.2; }
+.chat-stats span { color: var(--doc-muted); font-size: .8rem; line-height: 1.3; }
+@media (max-width: 30rem) { .chat-stats { grid-template-columns: 1fr; } }
+
+/* Bunden: skrivefeltet med kontaktoplysninger og en grøn send-knap, der åbner en mail */
+.chat-compose { display: flex; align-items: center; gap: .75rem; margin-top: 2rem; }
+.chat-field {
+  flex: 1; min-width: 0; display: flex; flex-wrap: wrap; gap: .2rem .5rem; margin: 0;
+  padding: .8rem 1.25rem; background: #fff; border: 1px solid var(--doc-line); border-radius: 26px;
+  font-size: .9rem; color: var(--doc-ink);
+}
+.chat-field span { color: var(--doc-muted); }
+.chat-send {
+  flex: none; display: grid; place-items: center; width: 3rem; height: 3rem; border-radius: 50%;
+  background: var(--doc-green); color: #fff; text-decoration: none;
+  transition: transform 160ms var(--ease-out), background-color 150ms ease;
+}
+.chat-doc .chat-send, .chat-doc .chat-send:hover { color: #fff; }
+.chat-send:hover { background: var(--doc-deep); }
+@media (hover: hover) and (pointer: fine) { .chat-send:hover { transform: translateY(-1px); } }
+.chat-send:active { transform: scale(.95); }
+@media (prefers-reduced-motion: reduce) { .chat-send, .chat-send:hover, .chat-send:active { transform: none; } }
