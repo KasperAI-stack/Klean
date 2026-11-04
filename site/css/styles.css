@@ -637,6 +637,7 @@ h1 {
 .tool-name { font-size: .85rem; font-weight: 500; color: var(--muted); text-align: center; }
 .t1 { --r: -6deg; } .t2 { --r: 5deg; } .t3 { --r: -3deg; } .t4 { --r: 7deg; }
 .t5 { --r: 4deg; } .t6 { --r: -7deg; } .t7 { --r: 6deg; } .t8 { --r: -4deg; }
+.t9 { --r: 5deg; } .t10 { --r: -5deg; }
 
 @media (min-width: 52rem) {
   .tools-stage { min-height: 32rem; justify-content: center; padding: 3rem 2rem; }
@@ -652,6 +653,8 @@ h1 {
   .t6 { right: 25%; top: 28%; }
   .t7 { right: 6%;  top: 55%; }
   .t8 { right: 22%; top: 73%; }
+  .t9 { left: 38%; top: 2%; }
+  .t10 { right: 38%; top: 84%; }
 }
 
 /* FAQ: glasagtige kort (halvgennemsigtige med sløring) på bløde, slørede farveklatter i mint og guld.
